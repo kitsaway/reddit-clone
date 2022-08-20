@@ -6,6 +6,10 @@ Application is simplified version of reddit clone where user can: create post wi
 
 #### Only authenticated users are able to create posts/comments and vote. 
 
+## Hosted on Amplify
+
+https://main.da59jwti1mi9x.amplifyapp.com/
+
 ## Technologies
 
 Next.js, TypeScript, AWS services: Cognito, S3, Amplify, DynamoDB, GraphQL API using AppSync
