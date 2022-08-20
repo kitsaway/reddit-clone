@@ -11,6 +11,7 @@ import {
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import { useRouter } from "next/router";
 import useStyles from "../styles/formStyles";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
@@ -26,6 +27,7 @@ interface IFormInputs {
 
 export default function Signup() {
   const styles = useStyles();
+  const router = useRouter();
   const [showCode, setShowCode] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -69,7 +71,11 @@ export default function Signup() {
     try {
       await Auth.confirmSignUp(username, code);
       const amplifyUser = await Auth.signIn(username, password);
-      return amplifyUser;
+      if (amplifyUser) {
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
     } catch (error) {
       setIsError(true);
       setSignUpMessage(error.message);
